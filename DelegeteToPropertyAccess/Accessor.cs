@@ -13,10 +13,20 @@
             return this.Getter((TTarget)target);
         }
 
-        public void SetValue(object target, object value) {
-            if (this.Setter != null) {
-                this.Setter((TTarget)target, (TProperty)value);
+        public void SetValue(object target, object? value) {
+            if (this.Setter != null && value != null) {
+                this.Setter((TTarget)target, _changeType(value));
             }
+        }
+
+        private static TProperty _changeType(object value) {
+
+            var typeOfProperty = typeof(TProperty);
+
+            if (typeOfProperty.IsGenericType && typeOfProperty.GetGenericTypeDefinition().Equals(typeof(Nullable<>))) {
+                typeOfProperty = Nullable.GetUnderlyingType(typeOfProperty);
+            }
+            return (TProperty)Convert.ChangeType(value, typeOfProperty!);
         }
     }
 }
