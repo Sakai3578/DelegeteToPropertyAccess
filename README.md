@@ -30,3 +30,6 @@ for (int i = 0; i < string2dList.Count; i++) {
 Research on processing speed measurement results is published in following article. (written in Japanese)
 
 https://docs.sakai-sc.co.jp/article/programing/csharp-reflection-performance.html
+
+# License
+Feel free to use this at your own risk.
